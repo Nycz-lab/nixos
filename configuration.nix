@@ -88,16 +88,17 @@
     description = "nik";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  firefox
-    #  thunderbird
-	chromium
+    	firefox
+    	thunderbird
+	# chromium
 	discord
 	qbittorrent
 
 	tor-browser-bundle-bin
 	gcc
 	rustup
-
+	vim
+	file
     ];
   };
 
@@ -165,7 +166,11 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-  
+
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';  
 
   virtualisation.vmware.guest.enable = true;
 }
